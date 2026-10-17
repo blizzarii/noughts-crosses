@@ -1,49 +1,17 @@
 import random
 import time
-
-win = 21
-p_card1 = random.randint(1, 11)
-p_card2 = random.randint(1, 11)
-p_hand = p_card1 + p_card2
-print("your current hand: ", p_hand)
-time.sleep(1)
-if p_hand == 21:
-    print("you WIN!")
-else:
-    d_card1 = random.randint(1,11)
-    d_card2 = random.randint(1,10)
-    print("the dealer has: ", d_card1)
-    choice_1 = input("HIT or STAND?: ")
-    choice_1 = choice_1.upper()
-    if choice_1 == "HIT":
-        p_card3 = random.randint(1,11)
-        p_hand = p_hand + p_card3
-        print("your current hand: ", p_hand)
-        if p_hand >21:
-                print("you LOSE!")
-        else:
-             pass
-    elif choice_1 == "STAND":
-         choice_2 = input("HIT or STAND?: ")
-         choice_2 = choice_2.upper()
-         if choice_2 == "HIT":
-                 p_card3 = random.randint(1,11)
-                 p_hand = p_hand + p_card3
-                 print("your current hand: ", p_hand)
-         elif choice_2 == "STAND":
-                 #the dealer flips his hidden card and hits until he gets a higher number than the player
-                 d_hand = d_card1
-                 print("the dealer's current hand: ", d_hand)
-                 d_hand = d_hand + d_card2
-                 print("the card flips.. his total is now.. ", d_hand)
-                 while d_hand <21 and d_hand <p_hand:
-                       d_card_showdown = random.randint(1,11)
-                       d_hand = d_hand + d_card_showdown
-                       print("the dealer's total: ", d_hand)
-                       
-
-                 if p_hand >21:
-                         print("you LOSE!")
-         
-    else:
-          print("invalid")
+deck = [2, 3, 4, 5, 6, 7, 8]
+player_hand = []
+def hand_total(cards):
+    aces = 0
+    total = 0
+    for value in cards:
+        total = total + value
+        #since aces can either be 1 or 11 ive written the function to be able to determine when an ace that is 11 should turn into a 1 when the total hand value is >21
+        if value == 11:
+            aces = aces + 1
+    while total > 21 and aces > 0:
+        total = total - 10
+        aces = aces - 1
+        return total
+           
