@@ -7,3 +7,7 @@ TO RUN:
   - run
   - choose between hit or stand
   - win by either having a higher hand than the dealer or get blackjack (21)
+
+ROADMAP:
+ - wagers
+ - saving data (money)
