@@ -1,3 +1,4 @@
+# blackjack, in python.
 ! ALL CODE IS WRITTEN BY HAND, AI USED TO HELP ONLY WITH DEBUGGING/QUERIES
 
 this was just a simple task to regather basic aspects of python that i've learnt and build on it.
