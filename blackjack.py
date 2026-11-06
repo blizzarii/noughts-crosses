@@ -1,8 +1,9 @@
 import random
 import time
+balance = 100
+bet = 0
 # 3 extra 10 cards to represent face cards
 deck = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10, 11,]
-
 
 def hand_total(cards):
     aces = 0
@@ -21,37 +22,75 @@ def hand_reveal(hand_type, owner):
     print(owner + " hand:\n" + str(hand_type))
     time.sleep(1)
     print("total: " + str(hand_total(hand_type)))
-# round start: starting hand is printed   
 
-player_hand = [random.choice(deck), random.choice(deck)]
-hand_reveal(player_hand, "your")
-while hand_total(player_hand) < 21:
-    #user input
-    move = input("hit or stand?: ")
-    move = move.lower()
-    if move == "hit":
-        player_hand.append(random.choice(deck))
-        hand_reveal(player_hand, "your")
+# balance and wagers, game will run until balance is <= 0
+while balance > 0:
+    try:
+        bet = int(input(f"balance: {balance}\nhow much money are you betting?: "))
+        if bet < 0:
+            print("invalid bet amount")
+        elif bet > balance:
+            print("insufficient balance")
+            change_mind = input("bet your whole balance instead?: ")
+            if change_mind == "y" or change_mind == "yes":
+                bet = balance
+            else:
+                continue
+
+    except ValueError:
+        print("not a number")
+        time.sleep(1)
+        continue
+
+
+    # round start: starting hand is printed   
+    player_hand = [random.choice(deck), random.choice(deck)]
+    hand_reveal(player_hand, "your")
+
+    while hand_total(player_hand) < 21:
+        #user input
+        move = input("hit or stand?: ")
+        move = move.lower()
+        if move == "hit":
+            player_hand.append(random.choice(deck))
+            hand_reveal(player_hand, "your")
+        else:
+            break
+    if hand_total(player_hand) > 21:
+        print("bust")
+        outcome = "lose"
     else:
-        break
-if hand_total(player_hand) > 21:
-    print("bust")
-else:
-    # showdown
-    dealer_hand = [random.choice(deck), random.choice(deck)]
-    hand_reveal(dealer_hand, "dealer's")
-    # dealer hits until total is greater or equal to 17
-    while hand_total(dealer_hand) < 17:
-        dealer_hand.append(random.choice(deck))
+        # showdown
+        dealer_hand = [random.choice(deck), random.choice(deck)]
         hand_reveal(dealer_hand, "dealer's")
+        # dealer hits until total is greater or equal to 17
+        while hand_total(dealer_hand) < 17:
+            dealer_hand.append(random.choice(deck))
+            hand_reveal(dealer_hand, "dealer's")
 
-    if hand_total(dealer_hand) <= 21 and hand_total(dealer_hand) > hand_total(player_hand):
-        print("lose, dealer had a higher hand")
-    elif hand_total(dealer_hand) == hand_total(player_hand):
-        print("draw, same hand")
+        if hand_total(dealer_hand) <= 21 and hand_total(dealer_hand) > hand_total(player_hand):
+            print("lose, dealer had a higher hand")
+            outcome = "lose"
+        elif hand_total(dealer_hand) == hand_total(player_hand):
+            print("draw, same hand")
+            break
+        elif hand_total(dealer_hand) >21:
+            print("win, dealer bust")
+            outcome = "win"
+        else:
+            print("win, highest hand")
+            outcome = "win"
+    
+    if outcome == "win":
+        balance += bet
     else:
-        print("win, highest hand")
+        balance -= bet    
+time.sleep(1)
+print(f"balance: {balance}")
+time.sleep(1)
+print("your pockets are empty..")
 
+# restart = input("restart run?: ")
 
      
 
