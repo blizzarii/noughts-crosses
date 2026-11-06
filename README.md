@@ -9,5 +9,5 @@ TO RUN:
   - win by either having a higher hand than the dealer or get blackjack (21)
 
 ROADMAP:
- - wagers
+ - wagers e
  - saving data (money)
