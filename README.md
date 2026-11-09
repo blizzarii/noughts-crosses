@@ -1,15 +1,14 @@
-# blackjack, in python.
+# noughts & crosses
+(tictactoe)
 ! ALL CODE IS WRITTEN BY HAND, AI USED TO HELP ONLY WITH DEBUGGING/QUERIES
 
-this was just a simple task to regather basic aspects of python that i've learnt and build on it.
-i've  also been watching CS50's python intro and playing games which involve using a python-like language to program a farming robot to automate tedious tasks that progress to eventually get more complicated.
+this is my second repo on github, so far ive figured out how to navigate it. wanted to test myself on another game.
 
 
-RUN GUIDE:
-  - choose amount to wager
-  - choose between hit or stand
-  - win by either having a higher hand than the dealer or get blackjack (21)
+# DETAILS:
+ - for now both players play from the same terminal/keyboard
+ - works like normal
 
-ROADMAP:
- - <del>wagers</del>
- - saving data (money)
+# ROADMAP:
+ - use 2D arrays instead of 1D lists
+ - online tictactoe? (maybe a stretch)
